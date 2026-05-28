@@ -1,16 +1,24 @@
 {application, keylara_filter, [
     {description, "em_filter agent exposing the KeyLARA cryptographic entropy API"},
-    {vsn, "0.1.0"},
-    {registered, []},
+    {vsn, "0.2.0"},
+    {registered, [keylara_filter_sup, keylara_filter_server]},
     {mod, {keylara_filter_app, []}},
     {applications, [
         kernel,
         stdlib,
+        cowboy,
         em_filter,
         keylara
     ]},
-    {env, []},
-    {modules, []},
+    {env, [
+        {pop_port,   0},
+        {query_port, 0},
+        {pop_seeds,  []}
+    ]},
+    {modules, [
+        keylara_filter_sup,
+        keylara_filter_server
+    ]},
     {licenses, ["Apache-2.0"]},
     {links, [{"GitHub", "https://github.com/EmergenceSystem/keylara_filter"}]}
 ]}.
